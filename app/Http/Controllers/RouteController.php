@@ -25,6 +25,7 @@ class RouteController extends Controller
                 ->create([
                         'server_ip' => $clientIp,
                         'mac_address' => $clientMac,
+                        'type' => 'jupyter',
                         'service_name' => Str::uuid(),
                         'service_port' => $latestConfig->service_port ?? 1025 + 1
                     ]);
@@ -33,6 +34,7 @@ class RouteController extends Controller
                 ->create([
                     'server_ip' => $clientIp,
                     'mac_address' => $clientMac,
+                    'type' => 'library',
                     'service_name' => Str::uuid(),
                     'service_port' => $latestConfig->service_port ?? 1025 + 2
                 ]);
