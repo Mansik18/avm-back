@@ -20,14 +20,13 @@ class RouteController extends Controller
 
         if ($clientConfig->isEmpty()) {
             $latestConfig = RouteConfig::query()->latest('id')->first();
-
             RouteConfig::query()
                 ->create([
                         'server_ip' => $clientIp,
                         'mac_address' => $clientMac,
                         'type' => 'jupyter',
                         'service_name' => Str::uuid(),
-                        'service_port' => $latestConfig->service_port ?? 1025 + 1
+                        'service_port' => ($latestConfig->service_port ?? 1025) + 1
                     ]);
 
             RouteConfig::query()
@@ -36,7 +35,7 @@ class RouteController extends Controller
                     'mac_address' => $clientMac,
                     'type' => 'library',
                     'service_name' => Str::uuid(),
-                    'service_port' => $latestConfig->service_port ?? 1025 + 2
+                    'service_port' => ($latestConfig->service_port ?? 1025) + 2
                 ]);
 
             $clientConfig = RouteConfig::query()
