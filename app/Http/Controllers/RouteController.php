@@ -19,7 +19,7 @@ class RouteController extends Controller
             ->get();
 
         if ($clientConfig->isEmpty()) {
-            $latestConfig = RouteConfig::query()->latest()->first();
+            $latestConfig = RouteConfig::query()->latest('id')->first();
 
             RouteConfig::query()
                 ->create([
